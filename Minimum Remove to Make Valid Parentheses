@@ -1,0 +1,27 @@
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        
+        stack=[]
+        
+        for i  in  range(len(s)):
+            
+            if s[i]=='(':
+                stack.append(['(',i])
+            elif s[i]==')':
+                if stack and stack[-1][0]=='(':
+                    stack.pop()
+                else:
+                    stack.append([')',i])
+        
+        stack_index=set()
+        for i in range(len(stack)):
+            stack_index.add(stack[i][1])
+        
+        ans=''
+        for i in range(len(s)):
+            if i not in stack_index:
+                ans = ans+s[i]
+            
+        return ans
+        
+  
